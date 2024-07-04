@@ -9,4 +9,6 @@ const hostname = process.env.HOSTNAME ?? '127.0.0.1';
 
 const server = http.createServer(app);
 
-server.listen(port, hostname);
+server.listen(port, hostname, () => {
+    console.log(`Server listening to http://${hostname}:${port}`)
+});
