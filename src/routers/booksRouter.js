@@ -1,7 +1,7 @@
 const express = require('express');
 
 const booksController = require('../controllers/booksController');
-const { validateBook } = require('../middlewares/validate.mw');
+const { validate: {validateBook} } = require('../middlewares');
 
 const router = express.Router();
 

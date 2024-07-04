@@ -5,7 +5,7 @@ module.exports.validateAuthor = async (req, res, next) => {
 
     try {
         const validatedAuthor = await schemas.AUTHOR_VALIDATION_SCHEMA
-            .validate(body);
+            .validate(body, {abortEarly: false});
         req.body = validatedAuthor;
         next();
     } catch (err) {
@@ -18,7 +18,7 @@ module.exports.validateBook = async (req, res, next) => {
 
     try {
         const validatedBook = await schemas.BOOK_VALIDATION_SCHEMA
-            .validate(body);
+            .validate(body, {abortEarly: false});
         req.body = validatedBook;
         next();
     } catch (err) {
@@ -31,7 +31,7 @@ module.exports.validateCustomer = async (req, res, next) => {
 
     try {
         const validatedCustomer = await schemas.CUSTOMER_VALIDATION_SCHEMA
-            .validate(body);
+            .validate(body, {abortEarly: false});
         req.body = validatedCustomer;
         next();
     } catch (err) {
