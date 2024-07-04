@@ -1,0 +1,26 @@
+GET http://localhost:5000/api/customers/
+###
+GET http://localhost:5000/api/customers/1
+###
+POST http://localhost:5000/api/customers/
+Content-Type: application/json
+
+    {
+        "full_name": "John Doe",
+        "email": "j-d@example.com",
+        "phone": "+55555555",
+        "password": "qwerty123"
+    }
+###
+DELETE http://localhost:5000/api/customers/14
+###
+PUT http://localhost:5000/api/customers/
+Content-Type: application/json
+
+    {
+        "id": 14,
+        "full_name": "Jane Doe",
+        "email": "j-doe@example.com",
+        "phone": "+4444444",
+        "password": "asdfgh321"
+    }
