@@ -1,7 +1,7 @@
 const db = require('../../db');
 
 class BooksController {
-    async getBooks(req, res) {
+    async getBooks(req, res, next) {
         try {
             const books = await db.query(
                 `SELECT b.id, b.title AS title, g.title AS genre, sh.description AS shelf
@@ -13,11 +13,11 @@ class BooksController {
             );
             res.status(200).json(books.rows);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async getBookById(req, res) {
+    async getBookById(req, res, next) {
         try {
             const { params: {bookId} } = req;
 
@@ -35,11 +35,11 @@ class BooksController {
                 ? res.status(200).json(...book.rows)
                 : res.status(404).json(`book id ${bookId} not found`);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async createBook(req, res) {
+    async createBook(req, res, next) {
         try {
             const {body: {
                 title, genre, shelf
@@ -60,11 +60,11 @@ class BooksController {
 
             res.status(201).json(...newBook.rows);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async deleteBook(req, res) {
+    async deleteBook(req, res, next) {
         try {
             const { params: {bookId} } = req;
 
@@ -77,11 +77,11 @@ class BooksController {
             ? res.status(200).json(...deletedBook.rows)
             : res.status(404).json(`book id ${bookId} not found`);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async updateBook(req, res) {
+    async updateBook(req, res, next) {
         try {
             const {body: {
                 id, title, genre, shelf
@@ -109,7 +109,7 @@ class BooksController {
                 ? res.status(200).json(...updatedBook.rows)
                 : res.status(404).json(`book id ${id} not found`);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 }

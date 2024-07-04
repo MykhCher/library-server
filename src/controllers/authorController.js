@@ -1,18 +1,18 @@
 const db = require('../../db');
 
 class AuthorController {
-    async getAuthors(req, res) {
+    async getAuthors(req, res, next) {
         try {
             const authors = await db.query(
                 'SELECT * FROM authors;'
             );
             res.status(200).json(authors.rows);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async getAuthorById(req, res) {
+    async getAuthorById(req, res, next) {
         try {
             const { params: {authorId} } = req;
 
@@ -28,11 +28,11 @@ class AuthorController {
                 ? res.status(200).json(...author.rows)
                 : res.status(404).json(`author id ${authorId} not found`);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async createAuthor(req, res) {
+    async createAuthor(req, res, next) {
         try {
             const {body: {
                 full_name, email, nationality
@@ -49,11 +49,11 @@ class AuthorController {
 
             res.status(201).json(...newAuthor.rows);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async deleteAuthor(req, res) {
+    async deleteAuthor(req, res, next) {
         try {
             const { params: {authorId} } = req;
 
@@ -66,11 +66,11 @@ class AuthorController {
             ? res.status(200).json(...deletedAuthor.rows)
             : res.status(404).json(`author id ${authorId} not found`);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async updateAuthor(req, res) {
+    async updateAuthor(req, res, next) {
         try {
             const {body: {
                 id, full_name, email, nationality
@@ -78,7 +78,7 @@ class AuthorController {
 
             const updatedAuthor = await db.query(
                 `UPDATE authors 
-                SET 
+                SET
                     full_name=$2,
                     email=$3,
                     nationality_id=(
@@ -94,7 +94,7 @@ class AuthorController {
                 ? res.status(200).json(...updatedAuthor.rows)
                 : res.status(404).json(`author id ${id} not found`);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 }

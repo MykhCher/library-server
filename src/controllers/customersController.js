@@ -1,18 +1,18 @@
 const db = require('../../db');
 
 class CustomerController {
-    async getCustomers(req, res) {
+    async getCustomers(req, res, next) {
         try {
             const customers = await db.query(
                 'SELECT id, full_name, email, phone FROM customers;'
             );
             res.status(200).json(customers.rows);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async getCustomerById(req, res) {
+    async getCustomerById(req, res, next) {
         try {
             const { params: {customerId} } = req;
 
@@ -26,11 +26,11 @@ class CustomerController {
                 ? res.status(200).json(...customer.rows)
                 : res.status(404).json(`customer id ${customerId} not found`);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async createCustomer(req, res) {
+    async createCustomer(req, res, next) {
         try {
             const {body: {
                 full_name, email, phone, password
@@ -43,11 +43,11 @@ class CustomerController {
 
             res.status(201).json(...newCustomer.rows);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async deleteCustomer(req, res) {
+    async deleteCustomer(req, res, next) {
         try {
             const { params: {customerId} } = req;
 
@@ -60,11 +60,11 @@ class CustomerController {
             ? res.status(200).json(...deletedCustomer.rows)
             : res.status(404).json(`customer id ${customerId} not found`);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 
-    async updateCustomer(req, res) {
+    async updateCustomer(req, res, next) {
         try {
             const {body: {
                 id, full_name, email, phone, password
@@ -85,7 +85,7 @@ class CustomerController {
                 ? res.status(200).json(...updatedCustomer.rows)
                 : res.status(404).json(`customer id ${id} not found`);
         } catch (err) {
-            console.log(err);
+            next(err);
         }
     }
 }
