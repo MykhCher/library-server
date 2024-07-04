@@ -91,8 +91,8 @@ class AuthorController {
             );
 
             updatedAuthor.rows[0] 
-            ? res.status(200).json(...updatedAuthor.rows)
-            : res.status(404).json(`author id ${id} not found`);
+                ? res.status(200).json(...updatedAuthor.rows)
+                : res.status(404).json(`author id ${id} not found`);
         } catch (err) {
             console.log(err);
         }
