@@ -1,7 +1,11 @@
 GET http://localhost:5000/api/authors
+
 ###
+
 GET http://localhost:5000/api/authors/23
+
 ###
+
 POST http://localhost:5000/api/authors/
 Content-Type: application/json
 
@@ -10,9 +14,13 @@ Content-Type: application/json
         "email": "l-a-s@example.com",
         "nationality": "IT"
     }
+    
 ###
+
 DELETE http://localhost:5000/api/authors/22
+
 ###
+
 PUT http://localhost:5000/api/authors/
 Content-Type: application/json
 
@@ -22,3 +30,4 @@ Content-Type: application/json
         "email": "sotonami@example.com",
         "nationality": "JP"
     }
+    

@@ -5,7 +5,7 @@ module.exports.validationErrorHandler = (err, req, res, next) => {
         return res.status(418).send({
             errors: [{
                 title: 'Validation error', 
-                details: err.stack
+                details: err.errors
             }],
         })
     }
@@ -15,6 +15,7 @@ module.exports.validationErrorHandler = (err, req, res, next) => {
 module.exports.errorHandler = (err, req, res, next) => {
 
     if(res.headerSent){
+        
         return;
     }
 

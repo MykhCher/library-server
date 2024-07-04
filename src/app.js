@@ -7,10 +7,10 @@ const router = require('./routers');
 
 const app = express();
 
-app.use(morgan('dev'));
 app.use(express.json());
+app.use(morgan('dev'));
+app.use('/api', router);
 app.use(validationErrorHandler, errorHandler);
 
-app.use('/api', router);
 
 module.exports = app;
