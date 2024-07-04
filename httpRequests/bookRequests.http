@@ -1,0 +1,24 @@
+GET http://localhost:5000/api/books
+###
+GET http://localhost:5000/api/books/22
+###
+POST http://localhost:5000/api/books/
+Content-Type: application/json
+
+    {
+        "title": "Politeia",
+        "genre": "Historical",
+        "shelf": "Classic"
+    }
+###
+DELETE http://localhost:5000/api/books/22
+###
+PUT http://localhost:5000/api/books/
+Content-Type: application/json
+
+    {
+        "id": 22,
+        "title": "Moral Letters to Lucilius",
+        "genre": "Education",
+        "shelf": "Classic"
+    }
